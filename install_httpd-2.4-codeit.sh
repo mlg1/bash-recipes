@@ -29,3 +29,5 @@ check_exit_code $? "Start 'httpd' service"
 
 /usr/bin/systemctl enable httpd > $0.log 2>&1
 check_exit_code $? "Enable to start on boot 'httpd' service"
+
+log "INFO" "Done"

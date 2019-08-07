@@ -22,6 +22,8 @@ check_exit_code $? "Install Webtatic repo"
 /bin/yum install -y -q \
         php56w-common php56w-cli php56w-bcmath php56w-dba php56w-embedded php56w-enchant \
         php56w-gd php56w-imap php56w-interbase php56w-intl php56w-ldap php56w-mbstring php56w-mcrypt \
-        php56w-mssql php56w-mysqlnd php56w-odbc php56w-opcache php56w-pdo php56w-pear php56w-pgsql \
+        php56w-mysqlnd php56w-odbc php56w-opcache php56w-pdo php56w-pear php56w-pgsql \
         php56w-process php56w-snmp php56w-soap php56w-tidy php56w-xml php56w-xmlrpc > $0.log 2>&1
 check_exit_code $? "Install PHP 5.6"
+
+log "INFO" "Done"

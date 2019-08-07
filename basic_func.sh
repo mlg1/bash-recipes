@@ -43,6 +43,7 @@ function require {
 		log "WARN" "$REQU is not installed"
                 /bin/yum install -y -q $REQU > /dev/null 2>&1
                 check_exit_code $? "Installing '$REQU'"
+	else
+		log "INFO" "$REQU is installed"
         fi
-
 }
