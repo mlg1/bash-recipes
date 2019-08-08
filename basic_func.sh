@@ -47,3 +47,12 @@ function require {
 		log "INFO" "$REQU is installed"
         fi
 }
+
+
+# Function for password generating
+# Example:
+# password 16
+function password {
+	LENGTH=$1
+	date +"%s" | sha256sum | base64 -w 0 | head -c $LENGTH
+}
