@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Description: Install mysql(mariadb 5.5) server on CentOS 7.x
+# Description: Install MariaDB 10.4 server on CentOS 7.x
 # Author: Nedelin Petkov
 # Version: 0.2
 #
@@ -11,9 +11,21 @@
 # Load basic functions
 source basic_func.sh
 
+# Add MariaDB repo
+log "INFO" "Add MariaDB repo"
+/usr/bin/cat <<EOF > /etc/yum.repos.d/MariaDB.repo
+# MariaDB 10.4 CentOS repository list
+# http://downloads.mariadb.org/mariadb/repositories/
+[mariadb]
+name = MariaDB
+baseurl = http://yum.mariadb.org/10.4/centos7-amd64
+gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+gpgcheck=1
+EOF
+
 # Installing the necessary packages
-/bin/yum install -y -q mariadb mariadb-libs mariadb-server > $0.log 2>&1
-check_exit_code $? "Install mariadb, mariadb-libs and mariadb-server"
+/bin/yum install -y -q MariaDB-server MariaDB-client > $0.log 2>&1
+check_exit_code $? "Install MariaDB-server and MariaDB-client"
 
 # Start and enable service
 /usr/bin/systemctl start mariadb > $0.log 2>&1
@@ -29,6 +41,7 @@ MYSQL_PASSWORD=$(password 16)
 log "INFO" "Running mysql_secure_installation"
 /usr/bin/mysql_secure_installation > $0.log 2>&1 <<EOF
 
+n
 y
 $MYSQL_PASSWORD
 $MYSQL_PASSWORD
