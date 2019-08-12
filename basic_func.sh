@@ -24,12 +24,12 @@ function log {
 function check_exit_code {
 	CODE=$1
 	MESSAGE=$2
-        if [ $CODE -ne 0 ]; then
+	if [ $CODE -ne 0 ]; then
 		log "ERROR" "$MESSAGE"
 		exit 1
 	else
 		log "INFO" "$MESSAGE"
-        fi
+	fi
 }
 
 # Function for requiring package
@@ -39,7 +39,7 @@ function check_exit_code {
 #   require wget
 #   require httpd no
 function require {
-        REQU=$1
+	REQU=$1
 	INSTALL=$2
 	if [ "$INSTALL" = "" ]; then
 		INSTALL="yes"
@@ -56,7 +56,7 @@ function require {
 		fi
 	else
 		log "INFO" "$REQU is installed"
-        fi
+	fi
 }
 
 # Function for password generating
