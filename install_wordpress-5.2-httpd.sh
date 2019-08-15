@@ -2,7 +2,7 @@
 #
 # Description: Install WordPress 5.2 on Apache VHost on CentOS 7.x
 # Author: Nedelin Petkov
-# Version: 0.1
+# Version: 0.2
 #
 # Usage:
 #   ./install_wordpress-5.2-httpd.sh vhost_config_file
@@ -34,6 +34,16 @@ WP_DOWNLOAD_LINK="https://wordpress.org/wordpress-5.2.zip"
 require wget
 require unzip
 
-echo "$VHOST_SERVER_NAME || $VHOST_DOC_ROOT |||| $VHOST_USER"
+# Download WordPress
+/usr/bin/wget $WP_DOWNLOAD_LINK -O /tmp/wordpress.zip > $0.log 2>&1
+check_exit_code $? "Download WordPress"
+
+# Unzip WordPress
+/usr/bin/unzip /tmp/wordpress.zip -d /tmp > $0.log 2>&1
+check_exit_code $? "Unzip WordPress"
+
+# Coping WordPress in Document Root
+/usr/bin/cp -rf /tmp/wordpress/* $VHOST_DOC_ROOT > $0.log 2>&1
+check_exit_code $? "Coping WordPress in Document Root"
 
 log "INFO" "Done"
