@@ -2,7 +2,7 @@
 #
 # Description: Basic funtions for all recipes
 # Author: Nedelin Petkov
-# Version: 0.4
+# Version: 0.5
 #
 # Exit codes:
 # 0 - OK
@@ -65,4 +65,19 @@ function require {
 function password {
 	LENGTH=$1
 	date +"%s" | sha256sum | base64 -w 0 | head -c $LENGTH
+}
+
+# Function for parsing variables in apache config files
+# Example:
+#   get_httpd_var /etc/httpd/conf.d/vhost.conf DocumentRoot
+function get_httpd_var {
+	FILE=$1
+	VAR=$2
+	RETURN_VAR=$(grep '^[[:blank:]]*[^[:blank:]#;]' $FILE | awk '/<VirtualHost/ { var="" } /'$VAR'/ { var=$2 } /\/VirtualHost/ { print var }' | xargs)
+	if [ "$RETURN_VAR" = "" ]; then
+		log "ERROR" "The '$VAR' variable was not found"
+		exit 1
+	else
+		echo $RETURN_VAR
+	fi
 }

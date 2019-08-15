@@ -2,7 +2,7 @@
 #
 # Description: Create Virtual host on httpd with mod_fcgid on CentOS 7.x
 # Author: Nedelin Petkov
-# Version: 0.2
+# Version: 0.3
 #
 # Usage:
 #   ./create_httpd_vhost_fcgid.sh server_name server_alias ssl_certificate
@@ -25,13 +25,14 @@ if [ "$2" = "" ]; then
 	exit 1
 fi
 
-# Defines the input variables
+# Defines the variables
 SERVER_NAME=$1
 SERVER_ALIAS=$2
 SSL_CERT=$3
 WEB_USER=app-$SERVER_NAME
 WEB_USER_HOME_DIR=/var/www/$WEB_USER
 HTTPD_CONF_FILE=/etc/httpd/conf.d/$WEB_USER.conf
+SERVER_IP=$(hostname -i)
 
 # Require list
 require httpd no
@@ -96,7 +97,7 @@ log "INFO" "Set permissions and ownership on web user"
 log "INFO" "Create virtual host config"
 /usr/bin/cat <<EOF > $HTTPD_CONF_FILE
 # Automatically Generated on $(date +"%b %d %H:%M:%S")
-<VirtualHost *:80>
+<VirtualHost $SERVER_IP:80>
 	ServerAdmin webmaster@$SERVER_NAME
 	ServerName $SERVER_NAME
 	ServerAlias $SERVER_ALIAS
@@ -173,7 +174,7 @@ if [ "$SSL_CERT" = "letsencrypt" ]; then
 	log "INFO" "Add ssl config in virtual host file"
 	/usr/bin/cat <<EOF >> $HTTPD_CONF_FILE
 # Automatically Generated on $(date +"%b %d %H:%M:%S")
-<VirtualHost *:443>
+<VirtualHost $SERVER_IP:443>
 	ServerAdmin webmaster@$SERVER_NAME
 	ServerName $SERVER_NAME
 	ServerAlias $SERVER_ALIAS
@@ -271,7 +272,7 @@ if [ "$SSL_CERT" = "own" ]; then
 	log "INFO" "Add ssl config in virtual host file"
 	/usr/bin/cat <<EOF >> $HTTPD_CONF_FILE
 # Automatically Generated on $(date +"%b %d %H:%M:%S")
-<VirtualHost *:443>
+<VirtualHost $SERVER_IP:443>
 	ServerAdmin webmaster@$SERVER_NAME
 	ServerName $SERVER_NAME
 	ServerAlias $SERVER_ALIAS
