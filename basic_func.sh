@@ -44,7 +44,7 @@ function require {
 	if [ "$INSTALL" = "" ]; then
 		INSTALL="yes"
 	fi
-	/bin/rpm -qa | grep $REQU > /dev/null 2>&1
+	/bin/rpm -qa | grep -i $REQU > /dev/null 2>&1
 	if [ $? -ne 0 ]; then
 		log "WARN" "$REQU is not installed"
 		if [ "$INSTALL" = "yes" ]; then
