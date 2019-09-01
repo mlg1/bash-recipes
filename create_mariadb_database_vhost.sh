@@ -2,7 +2,7 @@
 #
 # Description: Create database on MariaDB for Virtual Host on CentOS 7.x
 # Author: Nedelin Petkov
-# Version: 0.1
+# Version: 0.2
 #
 # Usage:
 #   ./create_mariadb_database_vhost.sh vhost_config_file
@@ -56,8 +56,10 @@ check_exit_code $? "Flush privileges"
 log "INFO" "Creating ~/.my.cnf"
 /usr/bin/cat <<EOF > $VHOST_USER_HOME/.my.cnf
 [client]
+host=127.0.0.1
 user=$DB_USER
 password=$DB_PASSWORD
+database=$DB_NAME
 EOF
 
 log "INFO" "Done"
