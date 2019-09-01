@@ -2,7 +2,7 @@
 #
 # Description: Basic funtions for all recipes
 # Author: Nedelin Petkov
-# Version: 0.5
+# Version: 0.6
 #
 # Exit codes:
 # 0 - OK
@@ -79,5 +79,19 @@ function get_httpd_var {
 		exit 1
 	else
 		echo $RETURN_VAR
+	fi
+}
+
+# Function for parsing variables from INI and CNF file
+# Example:
+#   source_ini /root/.my.cnf
+#   echo $user
+function source_ini {
+	FILE=$1
+	if [[ -f "$FILE" ]]; then
+		source <(grep = $FILE)
+	else
+		log "ERROR" "$FILE is not exist"
+		exit 1
 	fi
 }
