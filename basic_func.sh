@@ -2,7 +2,7 @@
 #
 # Description: Basic funtions for all recipes
 # Author: Nedelin Petkov
-# Version: 0.6
+# Version: 0.7
 #
 # Exit codes:
 # 0 - OK
@@ -73,7 +73,7 @@ function password {
 function get_httpd_var {
 	FILE=$1
 	VAR=$2
-	RETURN_VAR=$(grep '^[[:blank:]]*[^[:blank:]#;]' $FILE | awk '/<VirtualHost/ { var="" } /'$VAR'/ { var=$2 } /\/VirtualHost/ { print var }' | xargs)
+	RETURN_VAR=$(grep '^[[:blank:]]*[^[:blank:]#;]' $FILE | awk '/<VirtualHost/ { var="" } /'$VAR'/ { var=$2 } /\/VirtualHost/ { print var }' | sort -u | xargs)
 	if [ "$RETURN_VAR" = "" ]; then
 		log "ERROR" "The '$VAR' variable was not found"
 		exit 1
