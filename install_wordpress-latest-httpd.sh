@@ -2,7 +2,7 @@
 #
 # Description: Install latest WordPress on Apache VHost on CentOS 7.x
 # Author: Nedelin Petkov
-# Version: 0.5
+# Version: 0.6
 #
 # Usage:
 #   ./install_wordpress-latest-httpd.sh vhost_config_file
@@ -88,8 +88,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once( ABSPATH . 'wp-settings.php' );
 EOF
 
-# Set ownership in public_html
-log "INFO" "Set ownership in public_html"
-/usr/bin/chown $VHOST_USER:$VHOST_USER -R $VHOST_DOC_ROOT/*
+# Set ownership in Document Root
+log "INFO" "Set ownership in Document Root"
+/usr/bin/chown $VHOST_USER:$VHOST_USER -R $VHOST_DOC_ROOT
 
 log "INFO" "Done"
