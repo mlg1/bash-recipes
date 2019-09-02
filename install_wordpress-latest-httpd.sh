@@ -1,14 +1,14 @@
 #!/bin/bash
 #
-# Description: Install WordPress 5.2 on Apache VHost on CentOS 7.x
+# Description: Install latest WordPress on Apache VHost on CentOS 7.x
 # Author: Nedelin Petkov
-# Version: 0.4
+# Version: 0.5
 #
 # Usage:
-#   ./install_wordpress-5.2-httpd.sh vhost_config_file
+#   ./install_wordpress-latest-httpd.sh vhost_config_file
 #   vhost_config_file - Full path of config file of virtual host 
 # Example:
-#   ./install_wordpress-5.2-httpd.sh /etc/httpd/conf.d/vhost.conf
+#   ./install_wordpress-latest-httpd.sh /etc/httpd/conf.d/vhost.conf
 #
 # Exit codes:
 # 0 - OK
@@ -29,7 +29,7 @@ VHOST_SERVER_NAME=$(get_httpd_var $VHOST_CONFIG ServerName)
 VHOST_DOC_ROOT=$(get_httpd_var $VHOST_CONFIG DocumentRoot)
 VHOST_USER=$(get_httpd_var $VHOST_CONFIG SuexecUserGroup)
 VHOST_USER_HOME=$(/usr/bin/cat /etc/passwd | grep $VHOST_USER | cut -d ":" -f 6)
-WP_DOWNLOAD_LINK="https://wordpress.org/wordpress-5.2.zip"
+WP_DOWNLOAD_LINK="https://wordpress.org/latest.zip"
 
 # Get database vars $host, $user, $password, $database
 source_ini $VHOST_USER_HOME/.my.cnf
