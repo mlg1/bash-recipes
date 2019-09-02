@@ -2,7 +2,7 @@
 Bash recipes
 
 Example for install WordPress:
-
+```
 ./check_os.sh
 ./install_httpd-2.4-codeit.sh
 ./install_certbot-0.36-centos.sh
@@ -11,10 +11,10 @@ Example for install WordPress:
 ./create_httpd_vhost_fcgid.sh example.com www.example.com letsencrypt
 ./create_mariadb_database_httpd.sh /etc/httpd/conf.d/app-example.com.conf
 ./install_wordpress-latest-httpd.sh /etc/httpd/conf.d/app-example.com.conf
-
+```
 
 Example for install Microweber:
-
+```
 ./check_os.sh
 ./install_httpd-2.4-codeit.sh
 ./install_certbot-0.36-centos.sh
@@ -23,3 +23,4 @@ Example for install Microweber:
 ./create_httpd_vhost_fcgid.sh example.com www.example.com letsencrypt
 ./create_mariadb_database_httpd.sh /etc/httpd/conf.d/app-example.com.conf
 ./install_microweber-latest-httpd.sh /etc/httpd/conf.d/app-example.com.conf
+```
