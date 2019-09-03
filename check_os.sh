@@ -19,7 +19,7 @@ fi
 source $OS_RELEASE
 
 # Check OS
-if [ "$NAME" == "CentOS Linux" ] && [ "$VERSION_ID" == "7" ]; then
+if [ "$NAME" = "CentOS Linux" ] && [ "$VERSION_ID" = "7" ]; then
 	echo '{ "os": "'$NAME'", "version": "'$VERSION_ID'" }'
 	exit 0
 else

@@ -95,3 +95,37 @@ function source_ini {
 		exit 1
 	fi
 }
+
+# Function for get IPv4 address if missing returns "false"
+function get_ipv4 {
+	# Check route to google dns over IPv4
+	IPV4_ROUTE=$(ip -o route get to 8.8.8.8)
+
+	# Check for unreachable
+	IPV4_UNREACH=$(echo $IPV4_ROUTE | grep "unreachable")
+
+	if [ "$IPV4_UNREACH" = "" ]; then
+		# Print IPv4 address
+		echo $IPV4_ROUTE | sed -n 's/.*src \([0-9.]\+\).*/\1/p'
+	else
+		# No IPv4 address found
+		echo "false"
+	fi
+}
+
+# Function for get IPv6 address if missing returns "false"
+function get_ipv6 {
+	# Check route to google dns over IPv6
+	IPV6_ROUTE=$(ip -o route get to 2001:4860:4860::8888)
+
+	# Check for unreachable
+	IPV6_UNREACH=$(echo $IPV6_ROUTE | grep "unreachable")
+
+	if [ "$IPV6_UNREACH" = "" ]; then
+		# Print IPv6 address
+		echo $IPV6_ROUTE | sed -n 's/.*src \([a-zA-Z0-9:]\+\).*/\1/p'
+	else
+		# No IPv6 address found
+		echo "false"
+	fi
+}
