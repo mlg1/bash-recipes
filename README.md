@@ -4,6 +4,7 @@ Bash recipes
 Example for install WordPress:
 ```
 ./check_os.sh
+./prepare.sh
 ./install_httpd-2.4-codeit.sh
 ./install_certbot-0.36-centos.sh
 ./install_php-7.2-webtatic.sh
@@ -16,6 +17,7 @@ Example for install WordPress:
 Example for install Microweber:
 ```
 ./check_os.sh
+./prepare.sh
 ./install_httpd-2.4-codeit.sh
 ./install_certbot-0.36-centos.sh
 ./install_php-7.2-webtatic.sh
