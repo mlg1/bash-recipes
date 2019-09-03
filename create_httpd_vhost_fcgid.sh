@@ -32,7 +32,7 @@ SSL_CERT=$3
 WEB_USER=app-$SERVER_NAME
 WEB_USER_HOME_DIR=/var/www/$WEB_USER
 HTTPD_CONF_FILE=/etc/httpd/conf.d/$WEB_USER.conf
-SERVER_IP=$(hostname -i)
+SERVER_IP=$(get_ipv4)
 
 # Require list
 require httpd no
