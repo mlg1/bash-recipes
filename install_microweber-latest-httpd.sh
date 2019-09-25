@@ -43,7 +43,7 @@ require unzip
 check_exit_code $? "Download Microweber"
 
 # Unzip Microweber in Document Root
-/usr/bin/unzip /tmp/microweber.zip -d $VHOST_DOC_ROOT > $0.log 2>&1
+/usr/bin/unzip -o /tmp/microweber.zip -d $VHOST_DOC_ROOT > $0.log 2>&1
 check_exit_code $? "Unzip Microweber in Document Root"
 
 # Create Microweber config file
